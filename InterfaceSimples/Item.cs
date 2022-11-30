@@ -13,7 +13,7 @@ namespace InterfaceSimples
         public int Slot;
         public string Name;
         public int Price;
-        private int Quantidade;
+        private int Quantidade; //Necessario função para incrementar itens repetidos no inventario
 
 
         public Item(int slot, string name, int price)
