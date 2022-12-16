@@ -10,36 +10,45 @@ namespace InterfaceSimples
 {
     internal class Inventario:IPainel //Aqui é feito o "contrato entre a Interface e a classe inventario, deve haver esse mesmo contarto na classe Store"
     {                                 //Todos os metodos publicos na Interface IPainel devem ser implementados nesta classe.
-        public List<Item> Items;      
-        public int Gold;
+        public Dictionary<int,Item> Itens;      
 
 
 
         public Inventario()
         {
-            Items = new List<Item>();
-
-            Items.Add(new Item(Items.Count + 1, "Katana", 10));   //Apenas para teste, só pode haver itens no inventario se forem comprados pela loja
-            Gold = 20;
+            Itens = new Dictionary<int, Item>();
         }
 
         //classe Draw e HandInput são obrigatórias nas classes Inventario e Store, pois elas vem da interface iPainel
         public void Draw()
         {
-            Console.Clear();
-
-            foreach (Item item in Items)
+            int option = -1;
+            var aux = 1;
+            while (option != 0)
             {
-                Console.WriteLine(item.ToString());
+                Console.Clear();
+                Console.WriteLine("Itens no seu inventário:");
+                foreach (var item in Itens)
+                {
+                    Console.WriteLine(item.Key.ToString() + item.Value.ToString());
+                    aux++;
+                }
+
+                    Console.WriteLine("Você usou uma unidade de: " + HandInput(out option).ToString());
+                    Console.ReadKey();
             }
 
-            Console.ReadKey();
+
         }
 
 
-        public void HandInput(int option)
+        public Item HandInput(out int option)
         {
+            if (int.TryParse(Console.ReadLine(), out option))
+                return Itens[option];
 
+            else
+                return null;
         }
     }
 }

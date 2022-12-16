@@ -10,22 +10,20 @@ namespace InterfaceSimples
 {
     public class Item
     {
-        public int Slot;
         public string Name;
         public int Price;
-        private int Quantidade; //Necessario função para incrementar itens repetidos no inventario
+        public int Qtde;
 
 
-        public Item(int slot, string name, int price)
-        {
-            this.Slot = slot;
+        public Item(string name, int price)
+        {  
             this.Name = name;
             this.Price = price;
         }
 
         public override string ToString()
         {
-            return $"{Slot} - {Name} x {Quantidade}";
+            return $" - {Name} x {Qtde}";
         }
     }
 }

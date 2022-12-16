@@ -11,6 +11,6 @@ namespace InterfaceSimples
     {
         public void Draw();
 
-        public void HandInput(int option);
+        public Item HandInput(out int option);
     }
 }
