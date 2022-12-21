@@ -41,14 +41,27 @@ namespace InterfaceSimples
 
         }
 
-
+        //trata a opção do usuário
         public Item HandInput(out int option)
         {
             if (int.TryParse(Console.ReadLine(), out option))
-                return Itens[option];
+            {
+                return UsarItem(option);
+            }
+
 
             else
                 return null;
+        }
+
+        //Retira o item usado do inventario
+        public Item UsarItem(int itemId)
+        {
+            Item _item = Itens[itemId];
+
+            _item.Qtde = _item.Qtde - 1;
+
+            return _item;
         }
     }
 }

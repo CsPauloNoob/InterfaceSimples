@@ -12,13 +12,14 @@ namespace InterfaceSimples
     {
         public string Name;
         public int Price;
-        public int Qtde;
+        public int Qtde; //Quantidade
 
 
         public Item(string name, int price)
         {  
             this.Name = name;
             this.Price = price;
+            this.Qtde = Qtde + 1;
         }
 
         public override string ToString()
