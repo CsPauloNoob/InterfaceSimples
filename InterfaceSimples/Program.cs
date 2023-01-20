@@ -25,7 +25,7 @@
 
                 option = Console.ReadLine();
 
-                switch (option)
+                switch (option)//fix
                 {
                     case "1":
                         player1.Inventario.Draw();
