@@ -8,15 +8,15 @@ using System.Xml.Linq;
 
 namespace InterfaceSimples
 {
-    internal class Inventario:IPainel //Aqui é feito o "contrato entre a Interface e a classe inventario, deve haver esse mesmo contarto na classe Store"
+    public class Inventario:IPainel //Aqui é feito o "contrato entre a Interface e a classe inventario, deve haver esse mesmo contarto na classe Store"
     {                                 //Todos os metodos publicos na Interface IPainel devem ser implementados nesta classe.
-        public Dictionary<int,Item> Itens;      
+        private List<Item> MyItens { get; set; }    
 
 
 
         public Inventario()
         {
-            Itens = new Dictionary<int, Item>();
+            MyItens = new List<Item>();
         }
 
         //classe Draw e HandInput são obrigatórias nas classes Inventario e Store, pois elas vem da interface iPainel
@@ -28,16 +28,15 @@ namespace InterfaceSimples
             {
                 Console.Clear();
                 Console.WriteLine("Itens no seu inventário:");
-                foreach (var item in Itens)
+                foreach (var item in MyItens)
                 {
-                    Console.WriteLine(item.Key.ToString() + item.Value.ToString());
+                    Console.WriteLine(item.Name +"  x  "+item.Qtde);
                     aux++;
                 }
 
-                    Console.WriteLine("Você usou uma unidade de: " + HandInput(out option).ToString());
+                    Console.WriteLine("Você usou uma unidade de: " + HandInput(out option).ToString()); //Espera uma opção, criar uma forma de sair do inventario sem precisar usar nada
                     Console.ReadKey();
             }
-
 
         }
 
@@ -57,11 +56,27 @@ namespace InterfaceSimples
         //Retira o item usado do inventario
         public Item UsarItem(int itemId)
         {
-            Item _item = Itens[itemId];
+            Item _item = MyItens[itemId];
 
             _item.Qtde = _item.Qtde - 1;
 
             return _item;
         }
+
+
+        public void AddFromStore(Item item)
+        {
+            //adciona mais 1 na quanridade se já há p item no inventario
+            if(MyItens.Select(i => i.Name == item.Name).Any())
+            {
+                MyItens.Find(x => x.Name == item.Name)
+                    .Qtde = item.Qtde + 1;
+            }
+            //caso não exista adciona o item novo
+            else
+                MyItens.Add(item);
+                
+        }
+
     }
 }

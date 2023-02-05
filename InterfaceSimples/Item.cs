@@ -15,16 +15,16 @@ namespace InterfaceSimples
         public int Qtde; //Quantidade
 
 
-        public Item(string name, int price)
+        public Item(string name, int price, int qtde)
         {  
             this.Name = name;
             this.Price = price;
-            this.Qtde = Qtde + 1;
+            this.Qtde = qtde;
         }
 
         public override string ToString()
         {
-            return $" - {Name} x {Qtde}";
+            return $" - Item: {Name} x Quantidade: {Qtde}";
         }
     }
 }
